@@ -14,8 +14,11 @@ from bs4 import BeautifulSoup
 
 ## url = https://finance.yahoo.com/quote/TSLA?p=TSLA&.tsrc=fin-srch
 
+headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0'
+    }
 def stock_price(stock_code):
-    r=requests.get(('https://finance.yahoo.com/quote/') + stock_code + ('?p=') + stock_code + ('.tsrc=fin-srch'))
+    r=requests.get(('https://finance.yahoo.com/quote/') + stock_code + ('?p=') + stock_code + ('.tsrc=fin-srch'), headers=headers)
     soup = BeautifulSoup(r.text,'lxml')
     content = soup.find('div', {"class" : 'My(6px) Pos(r) smartphone_Mt(6px)'}).find('span').text
    
